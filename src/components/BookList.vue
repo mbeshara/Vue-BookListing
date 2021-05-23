@@ -4,15 +4,18 @@
         <ul>
             <book-item v-for="book in books" v-bind:key="book.title" :book="book"></book-item>
         </ul>
+        <book-form @addBook='appendBook'></book-form>
     </div>
 </template>
 
 <script>
+import BookForm from './BookForm';
 import BookItem from './BookItem';
 
 export default {
     name: 'BookList',
     components: {
+        BookForm,
         BookItem,
     },
     data() {
@@ -24,7 +27,12 @@ export default {
                 {title: 'Amusing Ourselves to Death', author: 'Neil Postman'},
             ],
         }
-    }
+    },
+    methods: {
+        appendBook(bookTitle, bookAuthor) {
+            this.books.push({title: bookTitle, author: bookAuthor})
+        }
+    },
 }
 </script>
 
